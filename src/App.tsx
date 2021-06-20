@@ -1,9 +1,11 @@
 import GlobalStyle from './styles/global'
 
+import SignIn from './pages/SignIn'
+
 const App = () => {
   return (
     <>
-      <h1>Hello Gobarber</h1>
+      <SignIn />
       <GlobalStyle />
     </>
   )
