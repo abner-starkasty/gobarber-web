@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   align-items: stretch;
 `
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,44 +26,6 @@ export const Content = styled.div`
 
     h1 {
       margin-bottom: 24px;
-    }
-
-    input {
-      background-color: #232129;
-      border-radius: 10px;
-      border: 2px solid #232129;
-      padding: 16px;
-      width: 100%;
-      color: #f4ede8;
-
-      &::placeholder {
-        color: #666360;
-      }
-
-      & + input {
-        margin-top: 8px;
-      }
-    }
-
-    button {
-      color: #312e38;
-      background-color: #ff9000;
-
-      border-radius: 10px;
-      border: 0;
-
-      padding: 0px 16px;
-      height: 56px;
-      width: 100%;
-      margin-top: 16px;
-
-      font-weight: 500;
-
-      transition: background-color 0.2s;
-
-      &:hover {
-        background: ${shade(0.2, '#FF9000')};
-      }
     }
 
     a {
