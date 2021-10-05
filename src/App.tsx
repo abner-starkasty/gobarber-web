@@ -1,5 +1,16 @@
+import GlobalStyle from './styles/global'
+
+import SignIn from './pages/SignIn'
+import SignUp from './pages/SignUp'
+
 const App = () => {
-  return <h1>Hello Gobarber</h1>
+  return (
+    <>
+      <SignIn />
+      {/* <SignUp /> */}
+      <GlobalStyle />
+    </>
+  )
 }
 
 export default App
