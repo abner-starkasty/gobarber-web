@@ -6,8 +6,8 @@ import SignUp from './pages/SignUp'
 const App = () => {
   return (
     <>
-      {/* <SignIn /> */}
-      <SignUp />
+      <SignIn />
+      {/* <SignUp /> */}
       <GlobalStyle />
     </>
   )
