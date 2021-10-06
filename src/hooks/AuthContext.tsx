@@ -14,6 +14,7 @@ interface ISignInCredentials {
 interface IAuthContext {
   user: Record<string, unknown>
   signIn: (credentials: ISignInCredentials) => Promise<void>
+  signOut: () => void
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext)
@@ -44,12 +45,20 @@ const AuthProvider: React.FC = ({ children }) => {
     setAuthData({ token, user })
   }, [])
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber:token')
+    localStorage.removeItem('@GoBarber:user')
+
+    setAuthData({} as IAuthData)
+  }, [])
+
   return (
-    <AuthContext.Provider value={{ user: authData.user, signIn }}>
+    <AuthContext.Provider value={{ user: authData.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   )
 }
+
 const useAuth = (): IAuthContext => {
   const context = useContext(AuthContext)
 
