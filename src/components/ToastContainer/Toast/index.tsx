@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { CSSProperties, useEffect } from 'react'
 import { FiAlertCircle, FiXCircle, FiCheckCircle, FiInfo } from 'react-icons/fi'
 
 import { IToastMessage, useToast } from '../../../hooks/toast'
@@ -7,6 +7,7 @@ import { Container } from './styles'
 
 interface ToastProps {
   message: IToastMessage
+  style: Record<string, unknown>
 }
 
 const icons = {
@@ -15,7 +16,7 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 }
 
-const Toast = ({ message }: ToastProps) => {
+const Toast = ({ message, style }: ToastProps) => {
   const { removeToast } = useToast()
 
   useEffect(() => {
@@ -29,7 +30,11 @@ const Toast = ({ message }: ToastProps) => {
   }, [removeToast, message.id])
 
   return (
-    <Container $type={message.type} $hasDescription={!!message.description}>
+    <Container
+      $type={message.type}
+      $hasDescription={!!message.description}
+      style={style}
+    >
       {icons[message.type || 'info']}
 
       <div>
