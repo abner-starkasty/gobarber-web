@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useState } from 'react'
+import React, { createContext, useCallback, useContext, useState } from 'react'
 import api from '../services/api'
 
 interface IAuthData {
@@ -50,5 +50,14 @@ const AuthProvider: React.FC = ({ children }) => {
     </AuthContext.Provider>
   )
 }
+const useAuth = (): IAuthContext => {
+  const context = useContext(AuthContext)
 
-export { AuthContext, AuthProvider }
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider')
+  }
+
+  return context
+}
+
+export { AuthProvider, useAuth }
