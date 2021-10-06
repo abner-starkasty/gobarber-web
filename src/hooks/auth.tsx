@@ -13,6 +13,7 @@ interface ISignInCredentials {
 
 interface IAuthContextData {
   user: Record<string, unknown>
+  isSigned: boolean
   signIn: (credentials: ISignInCredentials) => Promise<void>
   signOut: () => void
 }
@@ -30,6 +31,16 @@ const AuthProvider: React.FC = ({ children }) => {
 
     return {} as IAuthData
   })
+  const [isSigned, setIsSigned] = useState(() => {
+    const token = localStorage.getItem('@GoBarber:token')
+    const user = localStorage.getItem('@GoBarber:user')
+
+    if (token && user) {
+      return true
+    }
+
+    return false
+  })
 
   const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post<any>('sessions', {
@@ -43,6 +54,7 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.setItem('@GoBarber:user', JSON.stringify(user))
 
     setAuthData({ token, user })
+    setIsSigned(true)
   }, [])
 
   const signOut = useCallback(() => {
@@ -50,10 +62,13 @@ const AuthProvider: React.FC = ({ children }) => {
     localStorage.removeItem('@GoBarber:user')
 
     setAuthData({} as IAuthData)
+    setIsSigned(false)
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user: authData.user, signIn, signOut }}>
+    <AuthContext.Provider
+      value={{ user: authData.user, isSigned, signIn, signOut }}
+    >
       {children}
     </AuthContext.Provider>
   )
