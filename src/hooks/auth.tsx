@@ -11,13 +11,13 @@ interface ISignInCredentials {
   password: string
 }
 
-interface IAuthContext {
+interface IAuthContextData {
   user: Record<string, unknown>
   signIn: (credentials: ISignInCredentials) => Promise<void>
   signOut: () => void
 }
 
-const AuthContext = createContext<IAuthContext>({} as IAuthContext)
+const AuthContext = createContext<IAuthContextData>({} as IAuthContextData)
 
 const AuthProvider: React.FC = ({ children }) => {
   const [authData, setAuthData] = useState<IAuthData>(() => {
@@ -59,7 +59,7 @@ const AuthProvider: React.FC = ({ children }) => {
   )
 }
 
-const useAuth = (): IAuthContext => {
+const useAuth = (): IAuthContextData => {
   const context = useContext(AuthContext)
 
   if (!context) {
