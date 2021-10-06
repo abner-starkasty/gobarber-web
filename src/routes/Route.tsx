@@ -30,7 +30,7 @@ const Route = ({
           <Redirect
             to={{
               pathname: isPrivate ? '/' : '/dashboard',
-              state: { from: location }, // apenas para armazenar o histórico de rotas no navegador
+              state: { from: location },
             }}
           />
         )

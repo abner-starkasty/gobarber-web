@@ -1,5 +1,5 @@
 import { useCallback, useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { FiLock, FiLogIn, FiMail } from 'react-icons/fi'
 import { Form } from '@unform/web'
 import { FormHandles } from '@unform/core'
@@ -24,6 +24,8 @@ interface SignInFormData {
 const SignIn = () => {
   const formRef = useRef<FormHandles>(null)
 
+  const history = useHistory()
+
   const { signIn } = useAuth()
   const { addToast } = useToast()
 
@@ -47,6 +49,8 @@ const SignIn = () => {
           email: data.email,
           password: data.password,
         })
+
+        history.push('/dashboard')
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err as any)
@@ -57,12 +61,12 @@ const SignIn = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+          title: 'Authentication Error',
+          description: 'There was an error logging in, check your credentials.',
         })
       }
     },
-    [signIn, addToast],
+    [signIn, addToast, history],
   )
 
   return (
