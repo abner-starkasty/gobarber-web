@@ -1,16 +1,18 @@
 import GlobalStyle from './styles/global'
 
 import SignIn from './pages/SignIn'
-import SignUp from './pages/SignUp'
+// import SignUp from './pages/SignUp'
 
-const App = () => {
-  return (
-    <>
+import { AuthProvider } from './hooks/AuthContext'
+
+const App = () => (
+  <>
+    <AuthProvider>
       <SignIn />
-      {/* <SignUp /> */}
-      <GlobalStyle />
-    </>
-  )
-}
+    </AuthProvider>
+
+    <GlobalStyle />
+  </>
+)
 
 export default App
