@@ -29,7 +29,7 @@ const SignUp = () => {
   const { addToast } = useToast()
 
   const handleSubmit = useCallback(
-    async (data: any) => {
+    async (data: SignUpFormData) => {
       try {
         formRef.current?.setErrors({})
 
